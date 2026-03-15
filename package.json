@@ -1,7 +1,18 @@
-"scripts": {
-  "build": "echo 'Static site ready'",
-  "android": "npx cap sync && npx cap run android",
-  "android:build": "npx cap sync && npx cap build android",
-  "sync": "npx cap sync",
-  "deploy": "git push origin main"
+{
+  "name": "devstation-app",
+  "version": "1.0.0",
+  "description": "DevStation — Developer Dashboard PWA & Android App",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static site ready'",
+    "android:sync": "npx cap sync android",
+    "android:open": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^5.7.0",
+    "@capacitor/core": "^5.7.0",
+    "@capacitor/cli": "^5.7.0"
+  },
+  "author": "DigitalDairy786",
+  "license": "MIT"
 }
