@@ -9,18 +9,9 @@
       "https://cdnjs.cloudflare.com"
     ]
   },
-  "android": {
-    "buildOptions": {
-      "keystorePath": null,
-      "keystorePassword": null,
-      "keystoreAlias": null,
-      "keystoreAliasPassword": null,
-      "releaseType": "APK"
-    }
-  },
   "plugins": {
     "SplashScreen": {
-      "launchShowDuration": 1500,
+      "launchShowDuration": 2000,
       "backgroundColor": "#111111",
       "androidSplashResourceName": "splash",
       "androidScaleType": "CENTER_CROP",
