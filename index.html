@@ -3,186 +3,190 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
-<title>DevStation</title>
+<title>DevStation | DigitalDairy786</title>
 
   <meta name="application-name"    content="DevStation"/>
-  <meta name="description"         content="Developer Dashboard — Code Editor, Live Preview & Tools"/>
   <meta name="mobile-web-app-capable"         content="yes"/>
   <meta name="apple-mobile-web-app-capable"   content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-  <meta name="apple-mobile-web-app-title"     content="DevStation"/>
-  <meta name="theme-color"         content="#a07840"/>
-  <meta name="msapplication-TileColor" content="#111111"/>
+  <meta name="theme-color"         content="#111111"/>
 
   <link rel="manifest" href="manifest.json"/>
 
-  <link rel="icon"             href="icon-192.png" type="image/png"/>
-  <link rel="apple-touch-icon" href="icon-192.png"/>
+  <link rel="icon"             href="icons/icon-192.png" type="image/png"/>
+  <link rel="apple-touch-icon" href="icons/icon-192.png"/>
 
-  <meta property="og:title"       content="DevStation"/>
-  <meta property="og:description" content="Developer Dashboard — Code Editor, Live Preview & Tools"/>
-  <meta property="og:type"        content="website"/>
-  <meta property="og:url"         content="https://ranag786tech-lang.github.io/devstation-app/"/>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/default.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closetag.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/selection/active-line.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/comment/comment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/foldcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/foldgutter.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/brace-fold.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/xml-fold.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/foldgutter.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
 
 <style>
 /* =============================================
-   RESET & MOBILE OPTIMIZATION
+   1. RESET & FULL SCREEN FIX
 ============================================= */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { 
-    height: 100%; 
-    width: 100%;
-    overflow: hidden; 
-    font-size: 13px;
-    background: #111111;
-}
 
 :root {
-  --black:    #111111;
-  --dark:     #1a1a1a;
-  --dark2:    #222222;
-  --dark3:    #2c2c2c;
-  --line:     #333333;
-  --line2:    #404040;
-  --muted:    #777777;
-  --sub:      #999999;
-  --text:     #e8e8e8;
-  --white:    #ffffff;
-  --brown:    #a07840;
-  --brown2:   #c49a50;
-  --brown-bg: rgba(160,120,64,.12);
-  --font:     'Segoe UI', system-ui, -apple-system, sans-serif;
-  --mono:     'Consolas', 'Courier New', monospace;
+  --bg: #111111;
+  --panel: #1a1a1a;
+  --accent: #a07840;
+  --text: #e8e8e8;
+  --border: #333333;
 }
 
-body {
-  font-family: var(--font);
-  background: var(--black);
-  color: var(--text);
-  display: flex;
-  flex-direction: column;
+html, body { 
+    height: 100dvh; /* Dynamic Viewport for Mobile */
+    width: 100vw;
+    overflow: hidden; 
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    position: fixed; /* Scrolling prevention */
 }
 
-/* =============================================
-   TITLEBAR - Fixed for Mobile
-============================================= */
-#titlebar {
-  height: 45px;
-  background: var(--dark);
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  gap: 6px;
-  flex-shrink: 0;
-  user-select: none;
-}
-
-.t-logo {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--white);
-  margin-right: 5px;
-}
-
-/* Menus hide on very small screens to prevent overlap */
-@media (max-width: 480px) {
-    .t-menus { display: none; }
-    .t-logo-sq { width: 28px; height: 28px; }
-}
-
-/* Rest of your styles continue here... (Maintaining original logic) */
-#app {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-  min-height: 0;
-}
-
-/* MOBILE RESPONSIVENESS FIXES */
-@media (max-width: 768px) {
-    #sidebar { width: 0; display: none; }
-    #act-bar { width: 40px; }
-    .t-btn { padding: 4px 8px; font-size: 11px; }
-    #preview-pane { display: none; }
-    #bottom-panel { height: 150px; }
-}
-
-/* ADDED: Full height container for standalone mode */
+/* Main Container - Poori Screen occupy karega */
 #main-wrapper {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 }
 
-/* CodeMirror Mobile Fix */
+/* =============================================
+   2. UI COMPONENTS
+============================================= */
+#titlebar {
+    height: 50px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.logo { font-weight: bold; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+
+#app-container {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    min-height: 0;
+}
+
+#editor-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    position: relative;
+}
+
+/* CodeMirror Height Fix */
 .CodeMirror {
-  flex: 1;
-  font-size: 14px !important; /* Slightly larger for mobile readability */
+    height: 100% !important;
+    font-size: 14px;
+    background: transparent !important;
 }
 
-/* Ensure original dashboard components remain intact */
-/* [Original sidebar, editor-area, tab-bar, workspace styles here] */
-/* ... (Baki saara CSS jo aapne bheja tha wo as it is rahega) ... */
+#preview-pane {
+    width: 40%;
+    background: white;
+    border-left: 1px solid var(--border);
+    display: block;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    #preview-pane { display: none; } /* Mobile par preview hide */
+    .logo span { display: none; }
+}
+
+/* Action Buttons */
+.btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+}
 </style>
 </head>
 <body>
 
 <div id="main-wrapper">
-    <div id="titlebar">
-      <div class="t-logo">
-        <div class="t-logo-sq">D</div>
-        DevStation
-      </div>
-      <div class="t-right">
-          <button class="t-btn run" onclick="runCode()">Run</button>
-          <button class="t-btn dl" onclick="downloadProject()">Save</button>
-      </div>
-    </div>
-
-    <div id="app">
-        <div id="editor-area">
-            <div id="workspace">
-                 <div id="editor-pane">
-                     <div id="cm-host"></div>
-                 </div>
-            </div>
+    <header id="titlebar">
+        <div class="logo">
+            <img src="icons/icon-96.png" width="24" height="24" alt="logo">
+            <span>DevStation</span>
         </div>
-    </div>
+        <div class="actions">
+            <button class="btn" onclick="runCode()">RUN</button>
+            <button class="btn" onclick="syncEditorState()" style="background:#333; margin-left:5px;">SAVE</button>
+        </div>
+    </header>
+
+    <main id="app-container">
+        <div id="editor-pane">
+            <div id="cm-editor-instance"></div>
+        </div>
+        <div id="preview-pane">
+            <iframe id="live-preview" style="width:100%; height:100%; border:none;"></iframe>
+        </div>
+    </main>
+
+    <footer style="height:25px; background:var(--panel); border-top:1px solid var(--border); font-size:10px; display:flex; align-items:center; padding:0 10px; color:#777;">
+        Status: Ready | v2026.03.15 | DigitalDairy786
+    </footer>
 </div>
 
-<script src="devstation-logic.js"></script>
 <script>
-// PWA Service Worker Registration with relative path fix
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('./sw.js').then(reg => {
-        console.log('SW Registered');
+    // 1. Initialize Global Objects
+    var currentFile = 'index.html';
+    var FILES = { 'index.html': { content: '<h1>Hello DevStation!</h1>' } };
+    var editor;
+
+    // 2. Setup CodeMirror
+    window.addEventListener('load', function() {
+        editor = CodeMirror(document.getElementById('cm-editor-instance'), {
+            value: FILES[currentFile].content,
+            mode: 'htmlmixed',
+            theme: 'material-darker',
+            lineNumbers: true,
+            autoCloseBrackets: true,
+            matchBrackets: true
+        });
     });
+
+    // 3. Live Preview Logic
+    function runCode() {
+        const content = editor.getValue();
+        const iframe = document.getElementById('live-preview');
+        const frameDoc = iframe.contentDocument || iframe.contentWindow.document;
+        frameDoc.open();
+        frameDoc.write(content);
+        frameDoc.close();
+        if(window.innerWidth <= 768) alert("Preview updated! Use Desktop mode for side-by-side view.");
+    }
+</script>
+
+<script src="devstation-logic.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').then(reg => console.log('SW OK')).catch(err => console.log('SW Fail'));
   });
 }
 </script>
+
 </body>
 </html>
