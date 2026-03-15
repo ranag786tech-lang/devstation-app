@@ -1,10 +1,10 @@
 {
-  "id": "/devstation-app/",
+  "id": "devstation-pwa-final",
   "name": "DevStation",
   "short_name": "DevStation",
   "description": "Developer Dashboard — Code Editor, Live Preview, Console & Tools",
-  "start_url": "/devstation-app/",
-  "scope": "/devstation-app/",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#111111",
@@ -48,13 +48,13 @@
     {
       "name": "New File",
       "short_name": "New",
-      "url": "/devstation-app/?action=new",
+      "url": "./index.html?action=new",
       "description": "Create a new file"
     },
     {
       "name": "Run Code",
       "short_name": "Run",
-      "url": "/devstation-app/?action=run",
+      "url": "./index.html?action=run",
       "description": "Run current code"
     }
   ]
