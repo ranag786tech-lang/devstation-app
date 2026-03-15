@@ -19,4 +19,4 @@
 ## 📦 Installation & Setup
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/YOUR_USERNAME/devstation-app.git](https://github.com/YOUR_USERNAME/devstation-app.git)
+   git clone [https://github.com/ranag786tech-lang/devstation-app.git](https://github.com/ranag786tech-lang/devstation-app.git)
