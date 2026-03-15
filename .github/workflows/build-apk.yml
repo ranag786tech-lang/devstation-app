@@ -19,10 +19,14 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          npm install @capacitor/android
+          npm install @capacitor/android @capacitor/core @capacitor/cli
 
-      - name: Sync Capacitor
+      - name: Add and Sync Android
         run: |
+          # Agar android folder nahi hai to create karega
+          if [ ! -d "android" ]; then
+            npx cap add android
+          fi
           npx cap sync android
 
       - name: Setup Java
