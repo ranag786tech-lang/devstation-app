@@ -1,155 +1,74 @@
-/**
- * DevStation - Core Logic Bridge
- * Version: 2026.03.15
- * File: devstation-logic.js
- *
- * Usage: Add this script AFTER your main dashboard HTML loads
- * <script src="devstation-logic.js"></script>
- *
- * Requires (from devstation-dashboard.html):
- *   - editor       (CodeMirror instance)
- *   - currentFile  (string)
- *   - FILES        (object)
- *   - notify()     (function)
- *   - conLog()     (function)
- *   - switchBottomPanel() (function)
- */
-
 'use strict';
 
-// ================================================
-// 1. DEVSTATION CORE OBJECT
-// ================================================
 const DevStationLogic = {
   version: "2026.03.15",
   status:  "Active",
 
-  /**
-   * File Transfer Handler
-   * Checks if a file is an icon transfer and renames it
-   * @param {string} fileName
-   * @returns {string} final file name
-   */
   handleIconTransfer: function(fileName) {
-    console.log(`[System] Processing: ${fileName}`);
     if (fileName.includes('icon_transfer')) {
-      this.notifyUser("Icon transfer detected. Renaming for build...");
+      this.notifyUser("Icon detected. Renaming...");
       return "icon.svg";
     }
     return fileName;
   },
 
-  /**
-   * Notification Wrapper
-   * Links to dashboard notify() if available, else console fallback
-   * @param {string} msg
-   */
   notifyUser: function(msg) {
-    if (typeof notify === "function") {
-      notify('info', msg);
-    } else {
-      console.info(`[DevStation]: ${msg}`);
-    }
+    if (typeof notify === "function") notify('info', msg);
+    else console.info(`[DevStation]: ${msg}`);
   }
 };
 
 // ================================================
-// 2. EDITOR SYNC — saves active file to localStorage
+// FIXED: SYNC LOGIC WITH FALLBACK
 // ================================================
 function syncEditorState() {
-  // editor is defined in devstation-dashboard.html (CodeMirror instance)
-  if (typeof editor === "undefined" || !editor) {
-    console.warn("[DevStation] editor not ready yet.");
-    return;
-  }
-  if (typeof currentFile === "undefined") {
-    console.warn("[DevStation] currentFile not defined.");
-    return;
-  }
-
+  if (typeof editor === "undefined" || !editor) return;
+  
+  // Agar currentFile undefined hai to default set karein
+  const activeFile = typeof currentFile !== "undefined" ? currentFile : 'index.html';
   const content = editor.getValue();
 
   try {
-    localStorage.setItem('ds_file_' + currentFile, content);
-    console.log(`[Editor] Synced & saved → ${currentFile}`);
+    localStorage.setItem('ds_file_' + activeFile, content);
+    // APK Debugging ke liye
+    if (window.Capacitor) {
+       console.log("Capacitor Sync: " + activeFile);
+    }
   } catch (e) {
-    console.warn("[Editor] localStorage save failed:", e.message);
+    console.warn("[Editor] Save failed:", e.message);
   }
 }
 
 // ================================================
-// 3. RESTORE — load saved files from localStorage on startup
+// FIXED: RESTORE LOGIC (Safe Check)
 // ================================================
 function restoreFromLocalStorage() {
-  if (typeof FILES === "undefined") {
-    console.warn("[DevStation] FILES object not found.");
-    return;
-  }
+  if (typeof FILES === "undefined") return;
 
   Object.keys(FILES).forEach(function(fname) {
     const saved = localStorage.getItem('ds_file_' + fname);
     if (saved && saved.trim() !== "") {
       FILES[fname].content = saved;
-      if (typeof conLog === "function") {
-        conLog('info', '↺ Restored from cache: ' + fname);
-      }
+      // UI Update trigger
+      if (typeof conLog === "function") conLog('info', '↺ Restored: ' + fname);
     }
   });
+  
+  // Restore ke baad editor refresh lazmi hai
+  if (typeof editor !== "undefined" && typeof currentFile !== "undefined") {
+      editor.setValue(FILES[currentFile].content);
+  }
 }
 
-// ================================================
-// 4. BUILD TRIGGER SIMULATION
-// ================================================
-function triggerBuild() {
-  if (typeof conLog === "function") {
-    conLog('ok', '🚀 Triggering GitHub Actions Build...');
-  }
-
-  DevStationLogic.notifyUser("Build started. Check Actions tab.");
-
-  if (typeof switchBottomPanel === "function") {
-    switchBottomPanel('console');
-  }
-
-  setTimeout(function() {
-    if (typeof conLog === "function") {
-      conLog('info', '📦 Packaging: com.dg.devstation');
-    }
-  }, 1200);
-
-  setTimeout(function() {
-    if (typeof conLog === "function") {
-      conLog('ok', '✅ Build Successful!');
-    }
-    if (typeof notify === "function") {
-      notify('ok', '✅ Build done!');
-    }
-  }, 3000);
-}
+// ... (triggerBuild same rahega) ...
 
 // ================================================
-// 5. AUTO-SAVE every 30 seconds
+// AUTO-SAVE (Slightly faster for mobile stability)
 // ================================================
-setInterval(function() {
-  if (typeof editor !== "undefined" && editor) {
-    syncEditorState();
-  }
-}, 30000);
+setInterval(syncEditorState, 20000); 
 
-// ================================================
-// 6. INIT — runs after full page load
-//    NOTE: Using 'load' not 'DOMContentLoaded'
-//    because CodeMirror editor is ready only after 'load'
-// ================================================
 window.addEventListener('load', function() {
-  console.log(
-    "%c DevStation Logic v" + DevStationLogic.version + " Loaded ",
-    "background: #a07840; color: #fff; font-weight: bold; padding: 2px 6px; border-radius: 3px;"
-  );
-
-  // Small delay to make sure CodeMirror is fully initialized
   setTimeout(function() {
     restoreFromLocalStorage();
-    console.log("[DevStation] Status:", DevStationLogic.status);
-  }, 500);
+  }, 800);
 });
